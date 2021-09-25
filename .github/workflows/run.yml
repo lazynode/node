@@ -25,5 +25,12 @@ jobs:
       run: cd .node/neo-cli && dotnet restore
     - name: Build
       run: cd .node/neo-cli && dotnet publish -c Release
-    - name: Test
-      run: ls -R
+    - name: Run
+      run: python3 run.py
+    - name: Save
+      run: |
+        git config --global user.email "lazynode@protonmail.com"
+        git config --global user.name "lazynode"
+        git add .
+        git commit -m release
+        git push
