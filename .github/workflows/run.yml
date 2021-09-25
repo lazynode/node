@@ -1,0 +1,28 @@
+name: run
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: data
+    - name: Clone Neo Node
+      uses: actions/checkout@v2
+      with:
+        repository: https://github.com/neo-project/neo-node.git
+        ref: v3.0.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: cd neo-node/neo-cli && dotnet restore
+    - name: Build
+      run: cd neo-node/neo-cli && dotnet publish -c Release
+    - name: Test
+      run: ls -R
