@@ -17,14 +17,24 @@ jobs:
         repository: neo-project/neo-node
         ref: v3.0.2
         path: .node
+    - name: Clone Neo Modules
+      uses: actions/checkout@v2
+      with:
+        repository: neo-project/neo-modules
+        ref: v3.0.1
+        path: .modules
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: cd .node/neo-cli && sudo apt-get install -y libleveldb-dev sqlite3 libsqlite3-dev libunwind8-dev && dotnet restore
-    - name: Build
+    - name: Restore Neo Node
+      run: cd .node/neo-cli && dotnet restore
+    - name: Restore Neo Modules
+      run: cd .modules/src/LevelDBStore && dotnet restore
+    - name: Build Neo Node
       run: cd .node/neo-cli && dotnet publish -c Release
+    - name: Build Neo Modules
+      run: cd .modules/src/LevelDBStore && dotnet publish -c Release
     - name: Run
       run: python3 run.py
     - name: Save
