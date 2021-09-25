@@ -27,6 +27,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - name: Install Libraries
+      run: sudo apt-get install -y libleveldb-dev sqlite3 libsqlite3-dev libunwind8-dev
     - name: Restore Neo Node
       run: cd .node/neo-cli && dotnet restore
     - name: Restore Neo Modules
