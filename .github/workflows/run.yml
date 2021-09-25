@@ -35,6 +35,8 @@ jobs:
       run: cd .node/neo-cli && dotnet publish -c Release
     - name: Build Neo Modules
       run: cd .modules/src/LevelDBStore && dotnet publish -c Release
+    - name: Install Plugins
+      run: mkdir -p .node/neo-cli/bin/Release/net5.0/Plugins && cp .modules/src/LevelDBStore/bin/Release/net5.0/LevelDBStore.dll .node/neo-cli/bin/Release/net5.0/Plugins/
     - name: Run
       run: python3 run.py
     - name: Save
