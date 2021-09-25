@@ -16,13 +16,14 @@ jobs:
       with:
         repository: neo-project/neo-node
         ref: v3.0.2
+        path: .node
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: cd neo-node/neo-cli && dotnet restore
+      run: cd .node/neo-cli && dotnet restore
     - name: Build
-      run: cd neo-node/neo-cli && dotnet publish -c Release
+      run: cd .node/neo-cli && dotnet publish -c Release
     - name: Test
       run: ls -R
