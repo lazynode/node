@@ -22,7 +22,7 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: cd .node/neo-cli && dotnet restore
+      run: cd .node/neo-cli && sudo apt-get install -y libleveldb-dev sqlite3 libsqlite3-dev libunwind8-dev && dotnet restore
     - name: Build
       run: cd .node/neo-cli && dotnet publish -c Release
     - name: Run
