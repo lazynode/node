@@ -14,7 +14,7 @@ jobs:
     - name: Clone Neo Node
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/neo-project/neo-node.git
+        repository: neo-project/neo-node
         ref: v3.0.2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
